@@ -2,48 +2,59 @@
 
 var Bard = Em.Application.create();
 
-Bard.characterController = Ember.Object.create({
-  str: 10,
-  dex: 10,
-  con: 10,
-  int: 10,
-  wis: 10,
-  cha: 10,
+function addSkills(character) {
+  // This will eventually be pulled from some api.
+  var json = {
+    'acrobatics': 'dex',
+    'appraise': 'int',
+    'bluff': 'cha',
+    'climb': 'str',
+    'craft': 'int',
+    'diplomacy': 'cha',
+    'disable device': 'dex',
+    'disguise': 'cha',
+    'escape artist': 'dex',
+    'fly': 'dex',
+    'handle animal': 'cha',
+    'heal': 'wis',
+    'intimidate': 'cha',
+    'knowledge arcana': 'int',
+    'knowledge dungeoneering': 'int',
+    'knowledge geography': 'int',
+    'knowledge history': 'int',
+    'knowledge local': 'int',
+    'knowledge nature': 'int',
+    'knowledge nobility': 'int',
+    'knowledge planes': 'int',
+    'knowledge religion': 'int',
+    'linguistics': 'int',
+    'perception': 'wis',
+    'perform': 'cha',
+    'profession': 'wis',
+    'ride': 'dex',
+    'sense motive': 'wis',
+    'sleight of hand': 'dex',
+    'spellcraft': 'int',
+    'stealth': 'dex',
+    'survival': 'wis',
+    'swim': 'str',
+    'use magic device': 'cha',
+  }
+  var skills = character.get('skills');
+  _.each(json, function(abil, skill) {
+    var skill = Bard.store.createRecord(Bard.Skill, {
+      name: skill,
+      abil: abil,
+      character: character,
+    });
+    skills.addObject(skill);
+  });
+}
 
-  fort_base: 0,
-  refl_base: 0,
-  will_base: 0,
-
-  fort_abilBinding: 'con_mod',
-  refl_abilBinding: 'dex_mod',
-  will_abilBinding: 'wis_mod',
-
-  str_mod: function() {
-    return Math.floor((this.get('str') - 10) / 2);
-  }.property('str'),
-  dex_mod: function() {
-    return Math.floor((this.get('dex') - 10) / 2);
-  }.property('dex'),
-  con_mod: function() {
-    return Math.floor((this.get('con') - 10) / 2);
-  }.property('con'),
-  int_mod: function() {
-    return Math.floor((this.get('int') - 10) / 2);
-  }.property('int'),
-  wis_mod: function() {
-    return Math.floor((this.get('wis') - 10) / 2);
-  }.property('wis'),
-  cha_mod: function() {
-    return Math.floor((this.get('cha') - 10) / 2);
-  }.property('cha'),
-
-  fort: function() {
-    return parseInt(this.get('fort_base')) + parseInt(this.get('fort_abil'));
-  }.property('fort_base', 'fort_abil'),
-  refl: function() {
-    return parseInt(this.get('refl_base')) + parseInt(this.get('refl_abil'));
-  }.property('refl_base', 'refl_abil'),
-  will: function() {
-    return parseInt(this.get('will_base')) + parseInt(this.get('will_abil'));
-  }.property('will_base', 'will_abil'),
+$(function() {
+  var character = Bard.store.createRecord(Bard.Character, {});
+  addSkills(character);
+  Bard.characterController = Ember.Object.create({
+    character: character,
+  });
 });

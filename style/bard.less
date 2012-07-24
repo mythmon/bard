@@ -1,3 +1,14 @@
+input {
+    border-width: 2px;
+}
+input[disabled] {
+    background: #DDD;
+    color: #000;
+}
+* {
+    font-size: 12px;
+}
+
 .block {
     border: 1px solid black;
     margin: 10px;
@@ -11,6 +22,18 @@
     label {
         display: inline-block;
     }
+
+    .labels {
+        label {
+            font-weight: bold;
+        }
+        span {
+            display: inline-block;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
 }
 
 .abilities.block {
@@ -21,8 +44,7 @@
     }
 
     label {
-        width: 30px;
-        text-align: center;
+        width: 80px;
     }
 }
 
@@ -34,6 +56,33 @@
     }
 
     label {
-        width: 50px;
+        width: 60px;
+    }
+    .labels {
+        span {
+            width: 28px;
+        }
+    }
+}
+
+.skills.block {
+    input {
+        width: 22px;
+        text-align: right;
+        padding-right: 5px;
+    }
+    label {
+        width: 200px;
+    }
+    .labels {
+        label {
+            width: 205px;
+        }
+        span {
+            width: 45px;
+            display: inline-block;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
     }
 }

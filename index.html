@@ -12,7 +12,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet/less" type="text/css" href="style/bard.less">
-  <link rel="stylesheet" type="text/css" href="style/reset.css">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,69 +26,107 @@
 <body>
   <script type="text/x-handlebars">
     <h1>Character Sheet</h1>
-    {{#with Bard.characterController}}
+    {{#with Bard.characterController.character}}
       <div class="abilities block">
-        <h2>Abilities</h2>
+        <div class="labels">
+          <label>Abilities</label>
+          <span>Score</span>
+          <span>Mod</span>
+        </div>
+
         <div class="str">
-          <label>STR</label>
+          <label>Strength</label>
           {{view Ember.TextField valueBinding="str"}}
           <input type="text" disabled {{bindAttr value="str_mod"}} />
         </div>
         <div class="dex">
-          <label>DEX</label>
+          <label>Dexterity</label>
           {{view Ember.TextField valueBinding="dex"}}
           <input type="text" disabled {{bindAttr value="dex_mod"}} />
         </div>
         <div class="con">
-          <label>CON</label>
+          <label>Constitution</label>
           {{view Ember.TextField valueBinding="con"}}
           <input type="text" disabled {{bindAttr value="con_mod"}} />
         </div>
         <div class="int">
-          <label>INT</label>
+          <label>Intelligence</label>
           {{view Ember.TextField valueBinding="int"}}
           <input type="text" disabled {{bindAttr value="int_mod"}} />
         </div>
         <div class="wis">
-          <label>WIS</label>
+          <label>Wisdom</label>
           {{view Ember.TextField valueBinding="wis"}}
           <input type="text" disabled {{bindAttr value="wis_mod"}} />
         </div>
         <div class="cha">
-          <label>CHA</label>
+          <label>Charisma</label>
           {{view Ember.TextField valueBinding="cha"}}
           <input type="text" disabled {{bindAttr value="cha_mod"}} />
         </div>
       </div>
 
       <div class="saves block">
-        <h2>Saves</h2>
+        <div class="labels">
+          <label>Saves</label>
+          <span>Total</span>
+          <span>Base</span>
+          <span>Ability</span>
+        </div>
+
         <div class="fort">
-          <label>FORT</label>
+          <label>Fortitude</label>
           <input type="text" disabled {{bindAttr value="fort"}} />
           {{view Ember.TextField valueBinding="fort_base"}}
           <input type="text" disabled {{bindAttr value="fort_abil"}} />
         </div>
         <div class="refl">
-          <label>REFL</label>
+          <label>Reflex</label>
           <input type="text" disabled {{bindAttr value="refl"}} />
           {{view Ember.TextField valueBinding="refl_base"}}
           <input type="text" disabled {{bindAttr value="refl_abil"}} />
         </div>
         <div class="will">
-          <label>WILL</label>
+          <label>Will</label>
           <input type="text" disabled {{bindAttr value="will"}} />
           {{view Ember.TextField valueBinding="will_base"}}
           <input type="text" disabled {{bindAttr value="will_abil"}} />
         </div>
       </div>
+
+      <br />
+      <div class="skills block">
+        <div class="labels">
+          <label>Skills</label>
+          <span>Total</span>
+          <span>Ability</span>
+          <span>Ranks</span>
+          <span>Misc</span>
+        </div>
+
+        {{#each skills}}
+          <div class="{{name}}">
+            <input type="checkbox" {{bindAttr checked="in_class"}} />
+            <label class="name">{{name}} ({{abil}})</label>
+            <input type="text" disabled {{bindAttr value="total"}} /> =
+            <input type="text" disabled {{bindAttr value="abil_mod"}} /> +
+            {{view Ember.TextField valueBinding="ranks"}} +
+            <input type="text" disabled {{bindAttr value="misc_sum"}} />
+          </div>
+        {{/each}}
+      </div>
     {{/with}}
   </script>
 
   <script src="lib/jquery-1.7.2.min.js"></script>
-  <script src="lib/ember-0.9.8.1.js"></script>
+  <script src="lib/handlebars.js"></script>
+  <script src="lib/ember.js"></script>
+  <script src="lib/ember-data.js"></script>
   <script src="lib/underscore.js"></script>
   <script src="lib/less-1.3.0.min.js"></script>
+
+  <script src="js/util.js"></script>
   <script src="js/bard.js"></script>
+  <script src="js/models.js"></script>
 </body>
 </html>
