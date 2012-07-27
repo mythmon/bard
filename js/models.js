@@ -1,4 +1,8 @@
-Bard.adapter = DS.Adapter
+"use strict";
+
+var Bard = Bard || Em.Application.create();
+
+Bard.adapter = DS.Adapter;
 Bard.store = DS.Store.create({
   revision: 4,
 });
@@ -6,6 +10,7 @@ Bard.store = DS.Store.create({
 Bard.Character = DS.Model.extend({
   name: DS.attr('string'),
   player: DS.attr('string'),
+  class: DS.attr('string'),
 
   str: DS.attr('number', {defaultValue: 10}),
   dex: DS.attr('number', {defaultValue: 10}),

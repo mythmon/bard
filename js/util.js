@@ -1,3 +1,5 @@
+"use strict";
+
 _.extend(_, {
   'sum': function(list) {
     return _.reduce(list, function(a, b) {return a + b;}, 0);

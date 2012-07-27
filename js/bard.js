@@ -1,10 +1,9 @@
 "use strict";
 
-var Bard = Em.Application.create();
+var Bard = Bard || Em.Application.create();
 
 function addSkills(character) {
   $.ajax({
-    //url: '/api/skills/all',
     url: 'http://bard.knowledge.prismaticgreen.com:4567/skills/all',
     dataType: 'json',
 
