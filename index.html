@@ -32,10 +32,18 @@
           {{view Ember.TextField valueBinding="name"}}
         </div>
         <div class="class">
+          <label>Class</label>
           {{view Ember.Select
                  contentBinding = "Bard.Knowledge.classes.content"
-                 valueBinding = "Bard.Knowledge.selected"
+                 optionLabelPath = "content.display_name"
+                 optionValuePath = "content.name"
+                 valueBinding = "class_name"
+                 prompt = "---"
           }}
+        </div>
+        <div class="level">
+          <label>Level</label>
+          {{view Ember.TextField valueBinding="level"}}
         </div>
       </div>
 

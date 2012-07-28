@@ -22,7 +22,7 @@ function addSkills(character) {
     },
 
     error: function(data) {
-      console.log('Something has gone horribly wrong.');
+      console.log('Could notload list of skills from BK.');
     }
   })
 }

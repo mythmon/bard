@@ -10,7 +10,16 @@ Bard.store = DS.Store.create({
 Bard.Character = DS.Model.extend({
   name: DS.attr('string'),
   player: DS.attr('string'),
-  class: DS.attr('string'),
+  level: DS.attr('number', {defaultValue: 1}),
+
+  class: null,
+  class_name: function(key, value) {
+    if (value === undefined) {
+      return this.get('class.name');
+    } else {
+      this.set('class', Bard.Knowledge.get('classes.' + value));
+    }
+  }.property(),
 
   str: DS.attr('number', {defaultValue: 10}),
   dex: DS.attr('number', {defaultValue: 10}),
@@ -38,9 +47,29 @@ Bard.Character = DS.Model.extend({
     return Math.floor((this.get('cha') - 10) / 2);
   }.property('cha'),
 
-  fort_base: DS.attr('number', {defaultValue: 0}),
-  refl_base: DS.attr('number', {defaultValue: 0}),
-  will_base: DS.attr('number', {defaultValue: 0}),
+  fort_base: function() {
+    var fort_array = this.get('class.fort');
+    if (fort_array) {
+      return parseInt(fort_array[this.get('level')]);
+    }
+    return 0;
+  }.property('class.fort', 'level'),
+
+  refl_base: function() {
+    var refl_array = this.get('class.refl');
+    if (refl_array) {
+      return parseInt(refl_array[this.get('level')]);
+    }
+    return 0;
+  }.property('class.refl', 'level'),
+
+  will_base: function() {
+    var will_array = this.get('class.will');
+    if (will_array) {
+      return parseInt(will_array[this.get('level')]);
+    }
+    return 0;
+  }.property('class.will', 'level'),
 
   fort: function() {
     return this.get('fort_base') + this.get('fort_abil');
