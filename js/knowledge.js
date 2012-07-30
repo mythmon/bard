@@ -43,17 +43,18 @@ Bard.Knowledge.Class = Em.Object.extend({
   name: null,
 
   _loaded: false,
+  _loading: false,
 
-  _fort: null,
-  fort: function() {
-    if (!this.get('_loaded')) {
+  unknownProperty: function(key) {
+    if (!this.get('_loaded') && !this.get('_loading')) {
       this._fetch();
     }
-    return this.get('_fort');
-  }.property('_fort'),
+    return undefined;
+  },
 
   _fetch: function() {
     var self = this;
+    this.set('_loading', true);
     $.ajax({
       url: 'http://bard.knowledge.prismaticgreen.com:4567/classes/%@1'
         .fmt(this.get('name')),
@@ -63,14 +64,16 @@ Bard.Knowledge.Class = Em.Object.extend({
         if (!data) { return; }
         _.each(data.stats, function(value, key) {
           var v = parseInt(key);
-          self.set('_' + key, value);
+          self.set(key, value);
         });
         self.set('_loaded', true);
+        self.set('_loading', false);
       },
 
       error: function(err) {
         console.log('Could not load ' + self.get('name') + ' data from BK.');
         self.set('_loaded', false);
+        self.set('_loading', false);
       },
     });
   }

@@ -11,7 +11,8 @@ function addSkills(character) {
       var skills = character.get('skills');
       _.each(data, function(json_skill, i) {
         var skill = Bard.store.createRecord(Bard.Skill, {
-          name: json_skill.display_name,
+          name: json_skill.name,
+          display_name: json_skill.display_name,
           abil: json_skill.stat,
           trained_only: json_skill.trained,
           check_penalty: json_skill.check_penalty,

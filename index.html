@@ -138,7 +138,7 @@
 
           {{#each skills}}
             <div class="{{name}}">
-              <input type="checkbox" {{bindAttr checked="in_class"}} />
+              <input type="checkbox" disabled {{bindAttr checked="in_class"}} />
               <label class="name">{{name}} ({{abil}})</label>
               <input type="text" disabled {{bindAttr value="total"}} /> =
               <input type="text" disabled {{bindAttr value="abil_mod"}} /> +

@@ -98,7 +98,6 @@ Bard.Skill = DS.Model.extend({
   name: DS.attr('string'),
   abil: DS.attr('string'),
   ranks: DS.attr('number', {defaultValue: 0}),
-  in_class: DS.attr('boolean', {defaultValue: false}),
 
   total: function() {
     var t = parseInt(this.get('ranks'));
@@ -122,4 +121,11 @@ Bard.Skill = DS.Model.extend({
   misc_sum: function() {
     return _.sum(this.get('misc_mods'));
   }.property('misc_mods'),
+
+  in_class: function() {
+    var class_skills = this.get('character.class.skills');
+    if (!class_skills) { return undefined; }
+    return class_skills.contains(this.get('name'));
+  }.property('character.class.skills'),
 });
+
