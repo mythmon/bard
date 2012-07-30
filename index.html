@@ -24,118 +24,131 @@
 </head>
 <body>
   <script type="text/x-handlebars">
-    <h1>Character Sheet</h1>
-    {{#with Bard.characterController.character}}
-      <div class="basics block">
-        <div class="name">
-          <label>Name</label>
-          {{view Ember.TextField valueBinding="name"}}
+    <div class="sheet">
+      <h1>Character Sheet</h1>
+      {{#with Bard.characterController.character}}
+        <div class="logo block">
+          Bard.Legend
         </div>
-        <div class="class">
-          <label>Class</label>
-          {{view Ember.Select
-                 contentBinding = "Bard.Knowledge.classes.content"
-                 optionLabelPath = "content.display_name"
-                 optionValuePath = "content.name"
-                 valueBinding = "class_name"
-                 prompt = "---"
-          }}
-        </div>
-        <div class="level">
-          <label>Level</label>
-          {{view Ember.TextField valueBinding="level"}}
-        </div>
-      </div>
-
-      <div class="abilities block">
-        <div class="labels">
-          <label>Abilities</label>
-          <span>Score</span>
-          <span>Mod</span>
-        </div>
-
-        <div class="str">
-          <label>Strength</label>
-          {{view Ember.TextField valueBinding="str"}}
-          <input type="text" disabled {{bindAttr value="str_mod"}} />
-        </div>
-        <div class="dex">
-          <label>Dexterity</label>
-          {{view Ember.TextField valueBinding="dex"}}
-          <input type="text" disabled {{bindAttr value="dex_mod"}} />
-        </div>
-        <div class="con">
-          <label>Constitution</label>
-          {{view Ember.TextField valueBinding="con"}}
-          <input type="text" disabled {{bindAttr value="con_mod"}} />
-        </div>
-        <div class="int">
-          <label>Intelligence</label>
-          {{view Ember.TextField valueBinding="int"}}
-          <input type="text" disabled {{bindAttr value="int_mod"}} />
-        </div>
-        <div class="wis">
-          <label>Wisdom</label>
-          {{view Ember.TextField valueBinding="wis"}}
-          <input type="text" disabled {{bindAttr value="wis_mod"}} />
-        </div>
-        <div class="cha">
-          <label>Charisma</label>
-          {{view Ember.TextField valueBinding="cha"}}
-          <input type="text" disabled {{bindAttr value="cha_mod"}} />
-        </div>
-      </div>
-
-      <div class="saves block">
-        <div class="labels">
-          <label>Saves</label>
-          <span>Total</span>
-          <span>Base</span>
-          <span>Ability</span>
-        </div>
-
-        <div class="fort">
-          <label>Fortitude</label>
-          <input type="text" disabled {{bindAttr value="fort"}} />
-          {{view Ember.TextField valueBinding="fort_base"}}
-          <input type="text" disabled {{bindAttr value="fort_abil"}} />
-        </div>
-        <div class="refl">
-          <label>Reflex</label>
-          <input type="text" disabled {{bindAttr value="refl"}} />
-          {{view Ember.TextField valueBinding="refl_base"}}
-          <input type="text" disabled {{bindAttr value="refl_abil"}} />
-        </div>
-        <div class="will">
-          <label>Will</label>
-          <input type="text" disabled {{bindAttr value="will"}} />
-          {{view Ember.TextField valueBinding="will_base"}}
-          <input type="text" disabled {{bindAttr value="will_abil"}} />
-        </div>
-      </div>
-
-      <br />
-      <div class="skills block">
-        <div class="labels">
-          <label>Skills</label>
-          <span>Total</span>
-          <span>Ability</span>
-          <span>Ranks</span>
-          <span>Misc</span>
-        </div>
-
-        {{#each skills}}
-          <div class="{{name}}">
-            <input type="checkbox" {{bindAttr checked="in_class"}} />
-            <label class="name">{{name}} ({{abil}})</label>
-            <input type="text" disabled {{bindAttr value="total"}} /> =
-            <input type="text" disabled {{bindAttr value="abil_mod"}} /> +
-            {{view Ember.TextField valueBinding="ranks"}} +
-            <input type="text" disabled {{bindAttr value="misc_sum"}} />
+        <div class="basics block">
+          <div class="name">
+            <label>Character Name</label>
+            {{view Ember.TextField valueBinding="name"}}
           </div>
-        {{/each}}
-      </div>
-    {{/with}}
+          <div class="alignment">
+            <label>Alignment</label>
+            {{view Ember.TextField valueBinding="alignment"}}
+          </div>
+          <div class="player_name">
+            <label>Player</label>
+            {{view Ember.TextField valueBinding="player_name"}}
+          </div>
+
+          <div class="class">
+            <label>Class</label>
+            {{view Ember.Select
+                   contentBinding = "Bard.Knowledge.classes.content"
+                   optionLabelPath = "content.display_name"
+                   optionValuePath = "content.name"
+                   valueBinding = "class_name"
+                   prompt = "---"
+            }}
+          </div>
+          <div class="level">
+            <label>Level</label>
+            {{view Ember.TextField valueBinding="level"}}
+          </div>
+        </div>
+
+        <div class="abilities block">
+          <div class="labels">
+            <label>Abilities</label>
+            <span>Score</span>
+            <span>Mod</span>
+          </div>
+
+          <div class="str">
+            <label>Strength</label>
+            {{view Ember.TextField valueBinding="str"}}
+            <input type="text" disabled {{bindAttr value="str_mod"}} />
+          </div>
+          <div class="dex">
+            <label>Dexterity</label>
+            {{view Ember.TextField valueBinding="dex"}}
+            <input type="text" disabled {{bindAttr value="dex_mod"}} />
+          </div>
+          <div class="con">
+            <label>Constitution</label>
+            {{view Ember.TextField valueBinding="con"}}
+            <input type="text" disabled {{bindAttr value="con_mod"}} />
+          </div>
+          <div class="int">
+            <label>Intelligence</label>
+            {{view Ember.TextField valueBinding="int"}}
+            <input type="text" disabled {{bindAttr value="int_mod"}} />
+          </div>
+          <div class="wis">
+            <label>Wisdom</label>
+            {{view Ember.TextField valueBinding="wis"}}
+            <input type="text" disabled {{bindAttr value="wis_mod"}} />
+          </div>
+          <div class="cha">
+            <label>Charisma</label>
+            {{view Ember.TextField valueBinding="cha"}}
+            <input type="text" disabled {{bindAttr value="cha_mod"}} />
+          </div>
+        </div>
+
+        <div class="saves block">
+          <div class="labels">
+            <label>Saves</label>
+            <span>Total</span>
+            <span>Base</span>
+            <span>Ability</span>
+          </div>
+
+          <div class="fort">
+            <label>Fortitude</label>
+            <input type="text" disabled {{bindAttr value="fort"}} />
+            {{view Ember.TextField valueBinding="fort_base"}}
+            <input type="text" disabled {{bindAttr value="fort_abil"}} />
+          </div>
+          <div class="refl">
+            <label>Reflex</label>
+            <input type="text" disabled {{bindAttr value="refl"}} />
+            {{view Ember.TextField valueBinding="refl_base"}}
+            <input type="text" disabled {{bindAttr value="refl_abil"}} />
+          </div>
+          <div class="will">
+            <label>Will</label>
+            <input type="text" disabled {{bindAttr value="will"}} />
+            {{view Ember.TextField valueBinding="will_base"}}
+            <input type="text" disabled {{bindAttr value="will_abil"}} />
+          </div>
+        </div>
+
+        <div class="skills block">
+          <div class="labels">
+            <label>Skills</label>
+            <span>Total</span>
+            <span>Ability</span>
+            <span>Ranks</span>
+            <span>Misc</span>
+          </div>
+
+          {{#each skills}}
+            <div class="{{name}}">
+              <input type="checkbox" {{bindAttr checked="in_class"}} />
+              <label class="name">{{name}} ({{abil}})</label>
+              <input type="text" disabled {{bindAttr value="total"}} /> =
+              <input type="text" disabled {{bindAttr value="abil_mod"}} /> +
+              {{view Ember.TextField valueBinding="ranks"}} +
+              <input type="text" disabled {{bindAttr value="misc_sum"}} />
+            </div>
+          {{/each}}
+        </div>
+      {{/with}}
+    </div>
   </script>
 
   <script src="lib/jquery-1.7.2.min.js"></script>
